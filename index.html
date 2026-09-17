@@ -46,6 +46,18 @@ async function loadMe(){const {data}=await sb.from('profiles').select('*').eq('i
 function renderMyProfileDetails(p){const rows=[];if(p.about)rows.push(`<div class="detailItem"><b>About me</b>${esc(p.about)}</div>`);if(p.age)rows.push(`<div class="detailItem"><b>Age</b>${esc(p.age)}</div>`);if(p.gender)rows.push(`<div class="detailItem"><b>Gender</b>${esc(p.gender)}</div>`);if(p.looking_for)rows.push(`<div class="detailItem"><b>Looking for</b>${esc(p.looking_for)}</div>`);if(p.location)rows.push(`<div class="detailItem"><b>Location</b>${esc(p.location)}</div>`);if(Array.isArray(p.interests)&&p.interests.length)rows.push(`<div class="detailItem"><b>Interests</b><div class="detailTags">${p.interests.map(x=>`<span class="detailTag">${esc(x)}</span>`).join('')}</div></div>`);$('myProfileDetails').innerHTML=rows.join('')||'<div class="empty">Add your profile details from Edit Profile.</div>'}
 async function loadExplore(){const {data,error}=await sb.from('profiles').select('*').neq('id',me.id).order('created_at',{ascending:false});if(error){$('exploreCard').innerHTML='<div class="card empty">'+esc(error.message)+'</div>';return}profiles=data||[];applyLocationSearch(false)}
 function applyLocationSearch(reset=true){locationQuery=$('locationSearch')?.value.trim()||'';filteredProfiles=locationQuery?profiles.filter(p=>String(p.location||'').toLowerCase().includes(locationQuery.toLowerCase())):profiles.slice();if(reset)currentIndex=0;else currentIndex=Math.min(currentIndex,Math.max(filteredProfiles.length-1,0));renderExplore()}
+async function viewProfile(id){
+  if(!me || !id || id===me.id) return;
+  try{
+    const {error}=await sb.from('profile_views').upsert(
+      {viewer_id:me.id, viewed_id:id},
+      {onConflict:'viewer_id,viewed_id', ignoreDuplicates:true}
+    );
+    if(error) console.warn('Profile view could not be recorded:', error);
+  }catch(err){
+    console.warn('Profile view error:', err);
+  }
+}
 function renderExplore(){
   if(currentIndex>=filteredProfiles.length){
     const text=locationQuery?`No profiles found in “${esc(locationQuery)}”.`:'No more profiles';
