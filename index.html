@@ -4,8 +4,8 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LoveConnect</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#faf9fb;color:#171827}.top{height:76px;background:#fff;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;padding:0 5%;position:sticky;top:0;z-index:20}.brand{font-size:28px;font-weight:800;color:#df3f70}.top button{border:0;background:none;font-size:25px;cursor:pointer}.wrap{max-width:1000px;margin:auto;padding:22px 14px 100px}.screen{display:none}.screen.active{display:block}.card,.list,.form{background:#fff;border:1px solid #eee;border-radius:24px;box-shadow:0 8px 25px #0000000a}.grid{display:grid;grid-template-columns:520px 1fr;gap:20px}.location{padding:12px 14px;background:#fff;border-radius:14px;margin-bottom:12px;border:1px solid #eee}.locationRow{display:flex;gap:8px;align-items:center}.locationRow input{flex:1;min-width:0;padding:11px 12px;border:1px solid #ddd;border-radius:11px;font:inherit}.locationRow button{padding:11px 14px;border:1px solid #ddd;border-radius:11px;background:#fff;cursor:pointer}.searchHint{font-size:12px;color:#888;margin-top:7px}.photo{height:430px;background:linear-gradient(135deg,#f2c3d2,#eadde7);display:flex;align-items:center;justify-content:center;font-size:90px;color:#fff;border-radius:24px 24px 0 0}.photoCarousel{height:100%;width:100%;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}.photoCarousel::-webkit-scrollbar{display:none}.photoSlide{position:relative;min-width:100%;height:100%;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;background:#f3edf1}.photoSlide img{width:100%;height:100%;object-fit:cover}.photoDots{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:flex;gap:6px;z-index:3}.photoDots span{width:7px;height:7px;border-radius:50%;background:#ffffff99;border:1px solid #fff}.photoDots span.active{background:#fff}.photoArrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:0;border-radius:50%;background:#17182799;color:#fff;font-size:22px;z-index:4;cursor:pointer}.photoArrow.left{left:10px}.photoArrow.right{right:10px}.photoSwipeHint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#17182799;color:#fff;padding:7px 11px;border-radius:18px;font-size:12px;z-index:3;pointer-events:none}.photo.hasMultiple .photoSwipeHint{display:block}.photo:not(.hasMultiple) .photoSwipeHint{display:none}.avatar{width:150px;height:150px;border-radius:50%;background:#dfa1b7;display:flex;align-items:center;justify-content:center;overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover}.photo img{width:100%;height:100%;object-fit:cover;border-radius:24px 24px 0 0}.photo{position:relative;overflow:hidden}.photo .avatar{position:relative;z-index:1}.photo.hasImage{background:#f3edf1}.photo.hasImage .avatar{display:none}.photoCount{position:absolute;right:12px;top:12px;background:#171827aa;color:#fff;padding:6px 10px;border-radius:16px;font-size:12px;z-index:2}.photoManager{margin:20px 0}.photoManager h3{margin:0 0 6px}.photoHint{font-size:12px;color:#888;margin:0 0 12px}.photoGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.photoSlot{position:relative;aspect-ratio:1;border:1px dashed #d8d8de;border-radius:14px;background:#faf9fb;overflow:hidden;display:flex;align-items:center;justify-content:center}.photoSlot img{width:100%;height:100%;object-fit:cover}.photoSlot .slotLabel{font-size:11px;color:#888;text-align:center;padding:4px}.photoSlot input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.photoSlot.addSlot{cursor:pointer}.photoSlot.addSlot:active{background:#fff0f4}.photoSlot .removePhoto{position:absolute;right:4px;top:4px;width:25px;height:25px;border:0;border-radius:50%;background:#171827cc;color:#fff;cursor:pointer;z-index:2}.uploadMsg{font-size:13px;margin-top:8px;color:#df3f70}@media(max-width:760px){.photoGrid{grid-template-columns:repeat(3,1fr)}}.info{padding:18px}.name{font-size:28px;font-weight:800}.muted{color:#7d7e8b}.online{color:#1da468;font-size:14px;margin-top:7px}.bio{line-height:1.5;margin-top:14px}.actions{display:flex;justify-content:center;gap:28px;padding:5px 15px 22px;align-items:center}.swipeCard{touch-action:pan-y;user-select:none;transition:transform .28s cubic-bezier(.22,.61,.36,1),opacity .28s ease;will-change:transform}.swipeCard.dragging{transition:none;cursor:grabbing}.swipeLabel{position:absolute;top:22px;padding:8px 14px;border:2px solid currentColor;border-radius:10px;font-weight:800;letter-spacing:.5px;background:#fff;z-index:8;opacity:0;pointer-events:none}.swipeLabel.likeLabel{right:22px;color:#2ca66f;transform:rotate(8deg)}.swipeLabel.passLabel{left:22px;color:#ef3d72;transform:rotate(-8deg)}.swipeHelp{text-align:center;color:#888;font-size:13px;margin:0 0 12px}
-.exploreActions{display:flex;justify-content:center;gap:28px;padding:14px 15px 8px;align-items:center}.exploreActions .round{box-shadow:0 6px 18px #00000010}.exploreDetails{margin-top:14px}.exploreDetails .detailItem{margin-top:10px}.exploreTapHint{text-align:center;color:#999;font-size:12px;margin:-5px 0 12px}.detailList{margin-top:18px;display:grid;gap:12px}.detailItem{padding:12px 14px;border-radius:14px;background:#faf7fa;border:1px solid #eee}.detailItem b{display:block;font-size:13px;color:#777;margin-bottom:4px}.detailTags{display:flex;flex-wrap:wrap;gap:7px}.detailTag{display:inline-block;padding:7px 11px;border-radius:18px;background:#fff0f4;color:#4b3140;font-size:14px}.round{width:58px;height:58px;border-radius:50%;border:1px solid #eee;background:#fff;font-size:23px;cursor:pointer}.round:active{transform:scale(.96)}.like{background:#ef3d72;color:#fff}.feature{padding:20px;margin-bottom:14px}.list-head{padding:18px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;gap:12px}.list-head h2{margin:0}.person{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid #eee}.person.click{cursor:pointer}.person.click:active{background:#fff5f8}.miniavatar{width:50px;height:50px;border-radius:50%;background:#dfa1b7;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}.miniavatar{overflow:hidden}.miniavatar img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}.details{flex:1;min-width:0}.details small{display:block;color:#888;margin-top:4px;overflow:hidden;text-overflow:ellipsis}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#faf9fb;color:#171827}.top{height:76px;background:#fff;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;padding:0 5%;position:sticky;top:0;z-index:20}.brand{font-size:28px;font-weight:800;color:#df3f70}.top button{border:0;background:none;font-size:25px;cursor:pointer}.wrap{max-width:1000px;margin:auto;padding:22px 14px 100px}.screen{display:none}.screen.active{display:block}.card,.list,.form{background:#fff;border:1px solid #eee;border-radius:24px;box-shadow:0 8px 25px #0000000a}.grid{display:grid;grid-template-columns:520px 1fr;gap:20px}.location{padding:12px 14px;background:#fff;border-radius:14px;margin-bottom:12px;border:1px solid #eee}.locationRow{display:flex;gap:8px;align-items:center}.locationRow input{flex:1;min-width:0;padding:11px 12px;border:1px solid #ddd;border-radius:11px;font:inherit}.locationRow button{padding:11px 14px;border:1px solid #ddd;border-radius:11px;background:#fff;cursor:pointer}.searchHint{font-size:12px;color:#888;margin-top:7px}.photo{height:430px;background:linear-gradient(135deg,#f2c3d2,#eadde7);display:flex;align-items:center;justify-content:center;font-size:90px;color:#fff;border-radius:24px 24px 0 0}.photoCarousel{height:100%;width:100%;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}.photoCarousel::-webkit-scrollbar{display:none}.photoSlide{position:relative;min-width:100%;height:100%;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;background:#f3edf1}.photoSlide img{width:100%;height:100%;object-fit:cover}.photoDots{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:flex;gap:6px;z-index:3}.photoDots span{width:7px;height:7px;border-radius:50%;background:#ffffff99;border:1px solid #fff}.photoDots span.active{background:#fff}.photoArrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:0;border-radius:50%;background:#17182799;color:#fff;font-size:22px;z-index:4;cursor:pointer}.photoArrow.left{left:10px}.photoArrow.right{right:10px}.photoSwipeHint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#17182799;color:#fff;padding:7px 11px;border-radius:18px;font-size:12px;z-index:3;pointer-events:none}.photo.hasMultiple .photoSwipeHint{display:block}.photo:not(.hasMultiple) .photoSwipeHint{display:none}.avatar{width:150px;height:150px;border-radius:50%;background:#dfa1b7;display:flex;align-items:center;justify-content:center;overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover}.photo img{width:100%;height:100%;object-fit:cover;border-radius:24px 24px 0 0}.photo{position:relative;overflow:hidden}.photo .avatar{position:relative;z-index:1}.photo.hasImage{background:#f3edf1}.photo.hasImage .avatar{display:none}.photoCount{position:absolute;right:12px;top:12px;background:#171827aa;color:#fff;padding:6px 10px;border-radius:16px;font-size:12px;z-index:2}.photoManager{margin:20px 0}.photoManager h3{margin:0 0 6px}.photoHint{font-size:12px;color:#888;margin:0 0 12px}.photoGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.photoSlot{position:relative;aspect-ratio:1;border:1px dashed #d8d8de;border-radius:14px;background:#faf9fb;overflow:hidden;display:flex;align-items:center;justify-content:center}.photoSlot img{width:100%;height:100%;object-fit:cover}.photoSlot .slotLabel{font-size:11px;color:#888;text-align:center;padding:4px}.photoSlot input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.photoSlot.addSlot{cursor:pointer}.photoSlot.addSlot:active{background:#fff0f4}.photoSlot .removePhoto{position:absolute;right:4px;top:4px;width:25px;height:25px;border:0;border-radius:50%;background:#171827cc;color:#fff;cursor:pointer;z-index:2}.uploadMsg{font-size:13px;margin-top:8px;color:#df3f70}@media(max-width:760px){.photoGrid{grid-template-columns:repeat(3,1fr)}}.info{padding:18px}.name{font-size:28px;font-weight:800}.muted{color:#7d7e8b}.online{color:#1da468;font-size:14px;margin-top:7px}.bio{line-height:1.5;margin-top:14px}.actions{display:flex;justify-content:center;gap:28px;padding:5px 15px 22px;align-items:center}.swipeCard{touch-action:pan-y;user-select:none;transition:transform .20s cubic-bezier(.22,.61,.36,1),opacity .20s ease;will-change:transform;contain:layout paint}.swipeCard.dragging{transition:none;cursor:grabbing}.swipeLabel{position:absolute;top:22px;padding:8px 14px;border:2px solid currentColor;border-radius:10px;font-weight:800;letter-spacing:.5px;background:#fff;z-index:8;opacity:0;pointer-events:none}.swipeLabel.likeLabel{right:22px;color:#2ca66f;transform:rotate(8deg)}.swipeLabel.passLabel{left:22px;color:#ef3d72;transform:rotate(-8deg)}.swipeHelp{text-align:center;color:#888;font-size:13px;margin:0 0 12px}
+.exploreActions{position:sticky;top:76px;z-index:18;display:flex;justify-content:center;gap:28px;padding:12px 15px 12px;align-items:center;background:#faf9fb;border-bottom:1px solid #eee;box-shadow:0 5px 14px #0000000a}.exploreActions .round{box-shadow:0 6px 18px #00000010}.exploreDetails{margin-top:14px}.exploreDetails .detailItem{margin-top:10px}.exploreTapHint{text-align:center;color:#999;font-size:12px;margin:-5px 0 12px}.detailList{margin-top:18px;display:grid;gap:12px}.detailItem{padding:12px 14px;border-radius:14px;background:#faf7fa;border:1px solid #eee}.detailItem b{display:block;font-size:13px;color:#777;margin-bottom:4px}.detailTags{display:flex;flex-wrap:wrap;gap:7px}.detailTag{display:inline-block;padding:7px 11px;border-radius:18px;background:#fff0f4;color:#4b3140;font-size:14px}.round{width:58px;height:58px;border-radius:50%;border:1px solid #eee;background:#fff;font-size:23px;cursor:pointer}.round:active{transform:scale(.96)}.like{background:#ef3d72;color:#fff}.feature{padding:20px;margin-bottom:14px}.list-head{padding:18px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;gap:12px}.list-head h2{margin:0}.person{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid #eee}.person.click{cursor:pointer}.person.click:active{background:#fff5f8}.miniavatar{width:50px;height:50px;border-radius:50%;background:#dfa1b7;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}.miniavatar{overflow:hidden}.miniavatar img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}.details{flex:1;min-width:0}.details small{display:block;color:#888;margin-top:4px;overflow:hidden;text-overflow:ellipsis}
 .interestActions{display:flex;gap:7px;align-items:center;margin-left:auto}
 .acceptBtn{border-color:#d24c73}
 .declineBtn{border-color:#aaa}
@@ -125,36 +125,47 @@ function renderExplore(){
 function passProfile(){currentIndex++;renderExplore()}
 function setupProfileSwipe(){
   const card=$('swipeCard'); if(!card)return;
-  let startX=0,startY=0,dx=0,dragging=false,activePointer=null;
-  const reset=()=>{card.classList.remove('dragging');card.style.transform='';card.style.opacity='';$('likeLabel').style.opacity=0;$('passLabel').style.opacity=0};
-  const move=(x,y)=>{
-    dx=x-startX;
-    const dy=y-startY;
-    if(Math.abs(dx)<8||Math.abs(dx)<Math.abs(dy))return;
-    dragging=true;
-    card.classList.add('dragging');
-    card.style.transform=`translate3d(${dx}px,0,0) rotate(${dx/22}deg)`;
-    card.style.opacity=String(Math.max(.78,1-Math.abs(dx)/600));
-    $('likeLabel').style.opacity=String(Math.min(1,Math.max(0,dx/100)));
-    $('passLabel').style.opacity=String(Math.min(1,Math.max(0,-dx/100)));
+  let startX=0,startY=0,dx=0,dragging=false,activePointer=null,raf=0,pendingX=0,pendingY=0;
+  const likeLabel=$('likeLabel'), passLabel=$('passLabel');
+  const reset=()=>{
+    if(raf)cancelAnimationFrame(raf);
+    raf=0; card.classList.remove('dragging'); card.style.transform=''; card.style.opacity='1';
+    likeLabel.style.opacity=0; passLabel.style.opacity=0;
   };
-  const end=()=>{
+  const paint=()=>{
+    raf=0;
+    const x=pendingX,y=pendingY,dy=y-startY;
+    if(Math.abs(x)<8 || Math.abs(x)<Math.abs(dy)) return;
+    dragging=true; card.classList.add('dragging');
+    const rotation=Math.max(-8,Math.min(8,x/22));
+    card.style.transform=`translate3d(${x}px,0,0) rotate(${rotation}deg)`;
+    card.style.opacity=String(Math.max(.82,1-Math.abs(x)/700));
+    const amount=Math.min(1,Math.abs(x)/110);
+    likeLabel.style.opacity=x>0?String(amount):0;
+    passLabel.style.opacity=x<0?String(amount):0;
+  };
+  const move=(x,y)=>{
+    pendingX=x-startX; pendingY=y;
+    if(!raf)raf=requestAnimationFrame(paint);
+  };
+  const finish=()=>{
+    if(raf)cancelAnimationFrame(raf); raf=0;
     if(!dragging){reset();startX=0;startY=0;dx=0;activePointer=null;return}
-    const threshold=95;
+    const threshold=90;
+    const targetId=filteredProfiles[currentIndex]?.id;
+    const liked=dx>0;
     if(Math.abs(dx)>=threshold){
-      const liked=dx>0;
       card.classList.remove('dragging');
-      card.style.transition='transform .30s cubic-bezier(.22,.61,.36,1),opacity .26s ease';
-      card.style.transform=`translate3d(${liked?'115':'-115'}%,0,0) rotate(${liked?8:-8}deg)`;
+      card.style.transition='transform .20s cubic-bezier(.22,.61,.36,1),opacity .18s ease';
+      card.style.transform=`translate3d(${liked?'115%':'-115%'},0,0) rotate(${liked?7:-7}deg)`;
       card.style.opacity='0';
-      const targetId=filteredProfiles[currentIndex]?.id;
-      setTimeout(()=>{if(liked&&targetId)likeProfile(targetId);else passProfile()},260);
+      window.setTimeout(()=>{if(liked&&targetId)likeProfile(targetId);else passProfile()},190);
     }else{
       card.classList.remove('dragging');
-      card.style.transition='transform .34s cubic-bezier(.22,.61,.36,1),opacity .28s ease';
+      card.style.transition='transform .18s cubic-bezier(.22,.61,.36,1),opacity .16s ease';
       card.style.transform='translate3d(0,0,0) rotate(0deg)';
       card.style.opacity='1';
-      $('likeLabel').style.opacity=0;$('passLabel').style.opacity=0;
+      likeLabel.style.opacity=0; passLabel.style.opacity=0;
     }
     dragging=false;startX=0;startY=0;dx=0;activePointer=null;
   };
@@ -162,10 +173,18 @@ function setupProfileSwipe(){
     if(e.target.closest('.photoCarousel,.photoArrow,button'))return;
     startX=e.clientX;startY=e.clientY;dx=0;dragging=false;activePointer=e.pointerId;
     card.setPointerCapture?.(e.pointerId);
+    card.style.transition='none';
   });
-  card.addEventListener('pointermove',e=>{if(activePointer===e.pointerId)move(e.clientX,e.clientY)});
-  card.addEventListener('pointerup',e=>{if(activePointer===e.pointerId)end()});
-  card.addEventListener('pointercancel',e=>{if(activePointer===e.pointerId){dragging=false;dx=0;reset();startX=0;startY=0;activePointer=null}});
+  card.addEventListener('pointermove',e=>{
+    if(activePointer!==e.pointerId)return;
+    dx=e.clientX-startX;
+    move(e.clientX,e.clientY);
+  },{passive:true});
+  card.addEventListener('pointerup',e=>{if(activePointer===e.pointerId)finish()});
+  card.addEventListener('pointercancel',e=>{
+    if(activePointer!==e.pointerId)return;
+    dragging=false;dx=0;reset();startX=0;startY=0;activePointer=null;
+  });
 }
 async function likeProfile(id){const {error}=await sb.from('likes').upsert({liker_id:me.id,liked_id:id,status:'pending'},{onConflict:'liker_id,liked_id',ignoreDuplicates:true});if(error){toast(error.message);return}const mutual=await isMutualLike(id);toast(mutual?'It’s a match! You can chat now ♥':'Liked ♥');currentIndex++;renderExplore();if($('liked').classList.contains('active'))loadLiked()}
 async function isMutualLike(otherId){
