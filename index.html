@@ -1,0 +1,119 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LoveConnect</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial;background:#faf9fb;color:#171827}.top{height:68px;background:white;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;padding:0 5%;position:sticky;top:0;z-index:5}.brand{font-size:24px;font-weight:800;color:#ef3d72}.top button{border:0;background:none;font-size:20px}.wrap{max-width:1000px;margin:auto;padding:20px 14px 90px}.screen{display:none}.active{display:block}.card,.list,.form{background:white;border:1px solid #eee;border-radius:22px;box-shadow:0 8px 25px #0000000a}.grid{display:grid;grid-template-columns:520px 1fr;gap:20px}.location{padding:13px 16px;background:white;border-radius:14px;margin-bottom:12px}.photo{height:430px;background:linear-gradient(135deg,#f2c3d2,#eadde7);display:flex;align-items:center;justify-content:center;font-size:100px;color:white;position:relative;border-radius:22px 22px 0 0}.avatar{width:150px;height:150px;border-radius:50%;background:#dfa1b7;display:flex;align-items:center;justify-content:center}.badge{position:absolute;right:14px;top:14px;background:#0008;color:white;padding:7px 11px;border-radius:18px}.info{padding:18px}.name{font-size:28px;font-weight:800}.muted{color:#7d7e8b}.online{color:#1da468;font-size:14px;margin-top:7px}.bio{line-height:1.5;margin-top:14px}.actions{display:flex;justify-content:center;gap:14px;padding:5px 15px 20px}.round{width:58px;height:58px;border-radius:50%;border:1px solid #eee;background:white;font-size:23px}.like{background:#ef3d72;color:white}.feature{padding:20px;margin-bottom:14px}.list-head{padding:18px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}.person{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid #eee}.person.click{cursor:pointer}.miniavatar{width:50px;height:50px;border-radius:50%;background:#dfa1b7;color:white;display:flex;align-items:center;justify-content:center;font-weight:700}.details{flex:1}.details small{display:block;color:#888;margin-top:4px}.mini{border:0;background:#fff0f4;color:#ef3d72;border-radius:18px;padding:8px 12px;font-weight:700}.heart{color:#ef3d72;font-size:22px}.form{max-width:600px;margin:auto;padding:24px}.field{margin:11px 0}.field label{display:block;font-size:13px;color:#777;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;padding:13px;border:1px solid #ddd;border-radius:11px}.primary{width:100%;padding:14px;border:0;border-radius:12px;background:#ef3d72;color:white;font-weight:700}.secondary{padding:11px 15px;border:1px solid #ddd;border-radius:11px;background:white}.settings{max-width:600px;margin:auto}.row{padding:16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between}.settingBtn{width:100%;border:0;background:white;font:inherit;text-align:left;cursor:pointer}.settingBtn:active{background:#fff0f4}.list-head .secondary{padding:8px 12px}.chat{min-height:520px;display:flex;flex-direction:column}.messages{flex:1;padding:18px;overflow:auto}.bubble{background:#f0eff3;padding:11px 14px;border-radius:17px;max-width:70%;margin:7px 0}.me{margin-left:auto;background:#ef3d72;color:white}.compose{display:flex;gap:8px;padding:12px;border-top:1px solid #eee}.compose input{flex:1;border:1px solid #ddd;border-radius:22px;padding:12px}.nav{position:fixed;bottom:0;left:0;right:0;height:74px;background:white;border-top:1px solid #eee;display:flex;justify-content:center;z-index:9}.nav button{border:0;background:none;color:#888;min-width:90px}.nav button.activeNav{color:#ef3d72;font-weight:700}.nav span{display:block;font-size:22px;margin-bottom:3px}.empty{padding:45px 20px;text-align:center;color:#888}.auth{max-width:520px;margin:60px auto}.tabs{display:flex;gap:8px;margin-bottom:15px}.tabs button{flex:1;padding:12px;border:1px solid #ddd;background:white;border-radius:10px}.tabs button.sel{background:#fff0f4;color:#ef3d72;border-color:#ef3d72;font-weight:700}.msg{padding:10px 0;color:#ef3d72;font-size:14px}.hidden{display:none!important}@media(max-width:760px){.grid{grid-template-columns:1fr}.side{display:none}.photo{height:390px}.nav button{min-width:65px;font-size:12px}}
+</style></head><body>
+<header class="top"><div class="brand">♥ LoveConnect</div><button id="gear" onclick="openSettings()">⚙</button></header>
+<main class="wrap">
+<section id="auth" class="screen active"><div class="form auth"><div class="brand" style="text-align:center;margin-bottom:20px">♥ LoveConnect</div><div class="tabs"><button id="loginTab" class="sel" onclick="authMode('login')">Login</button><button id="signupTab" onclick="authMode('signup')">Create account</button></div><div id="authLogin"><h2>Welcome back</h2><div class="field"><label>Email</label><input id="le" type="email" required></div><div class="field"><label>Password</label><input id="lp" type="password" required></div><button class="primary" onclick="login()">Login</button></div><div id="authSignup" class="hidden"><h2>Create your account</h2><div class="field"><label>Name</label><input id="sn" required></div><div class="field"><label>Email</label><input id="se" type="email" required></div><div class="field"><label>Password</label><input id="sp" type="password" minlength="6" required></div><div class="field"><label>Age</label><input id="sa" type="number" min="18" required></div><div class="field"><label>Gender</label><select id="sg"><option>Man</option><option>Woman</option><option>Other</option></select></div><div class="field"><label>Looking for</label><select id="slf"><option>Women</option><option>Men</option><option>Everyone</option></select></div><div class="field"><label>Location</label><input id="sl" required></div><div class="field"><label>About me</label><textarea id="sb"></textarea></div><div class="field"><label>Interests</label><input id="si" placeholder="Travel, music, movies"></div><button class="primary" onclick="signup()">Create Account</button></div><div id="authMsg" class="msg"></div></div></section>
+<section id="explore" class="screen"><div class="grid"><div><div class="location">📍 <b id="myLocTop">Your location</b></div><div id="exploreCard"></div></div><div class="side"><div class="card feature"><h3>LoveConnect</h3><p class="muted">Explore profiles, like people, match and chat.</p></div><div class="card feature"><h3>Your activity</h3><p class="muted" id="activityText">Your real likes, views and chats will appear here.</p></div></div></div></section>
+<section id="viewed" class="screen"><div class="list"><div class="list-head"><h2>Viewed by</h2><b id="viewCount">0</b></div><div id="viewedList"></div></div></section>
+<section id="liked" class="screen"><div class="list"><div class="list-head"><h2>Liked you</h2><b id="likeCount">0</b></div><div id="likedList"></div></div></section>
+<section id="chats" class="screen"><div class="list"><div class="list-head"><h2>Chats</h2></div><div id="chatList"></div></div></section>
+<section id="chatroom" class="screen"><div class="list chat"><div class="list-head"><button onclick="show('chats')">←</button><b id="chatName"></b></div><div id="messages" class="messages"></div><div class="compose"><input id="message" placeholder="Type a message" onkeydown="if(event.key==='Enter')send()"><button class="primary" style="width:auto" onclick="send()">Send</button></div></div></section>
+<section id="profile" class="screen"><div class="form" style="text-align:center"><div class="avatar" style="margin:auto" id="myAvatar">M</div><h2 id="myName"></h2><p class="muted" id="myLocation"></p><button class="secondary" onclick="show('edit')">Edit Profile</button><button class="secondary" onclick="logout()" style="margin-left:8px">Logout</button></div></section>
+<section id="edit" class="screen"><form class="form" onsubmit="saveProfile(event)"><h2>Edit Profile</h2><div class="field"><label>Name</label><input id="en" required></div><div class="field"><label>Age</label><input id="ea" type="number" min="18" required></div><div class="field"><label>Gender</label><input id="eg"></div><div class="field"><label>Looking for</label><input id="elf"></div><div class="field"><label>Location</label><input id="el" required></div><div class="field"><label>About me</label><textarea id="eb"></textarea></div><div class="field"><label>Interests</label><input id="ei"></div><button class="primary">Save Profile</button></form></section>
+<section id="settings" class="screen"><div class="list settings"><div class="list-head"><button class="secondary" onclick="closeSettings()">← Back</button><h2 style="margin:0">Settings</h2><button class="secondary" onclick="closeSettings()" aria-label="Close settings">✕</button></div><button class="row settingBtn" onclick="showSetting('account')">Account <span>›</span></button><button class="row settingBtn" onclick="showSetting('notifications')">Notifications <span>›</span></button><button class="row settingBtn" onclick="showSetting('privacy')">Privacy &amp; Safety <span>›</span></button><button class="row settingBtn" onclick="showSetting('help')">Help &amp; Support <span>›</span></button><div class="row"><button class="secondary" onclick="logout()">Logout</button></div></div></section>
+<section id="settingDetail" class="screen"><div class="form"><div style="display:flex;align-items:center;gap:12px"><button class="secondary" onclick="show('settings')">← Back</button><h2 id="settingTitle" style="margin:0"></h2></div><div id="settingBody" class="bio" style="margin-top:24px"></div></div></section>
+</main><nav id="nav" class="nav hidden"><button data-s="explore" class="activeNav" onclick="show('explore')"><span>◈</span>Explore</button><button data-s="viewed" onclick="show('viewed')"><span>♧</span>Viewed by</button><button data-s="chats" onclick="show('chats')"><span>💬</span>Chats</button><button data-s="liked" onclick="show('liked')"><span>♡</span>Liked you</button><button data-s="profile" onclick="show('profile')"><span>♙</span>Profile</button></nav>
+<script>
+const SUPABASE_URL='https://deiwduvfskhqfzjpzyha.supabase.co';
+const SUPABASE_KEY='sb_publishable_ccXAv4AC1GPc2Bo795yfhQ_E8c0rypY';
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let me=null, profiles=[], currentIndex=0, currentChatUser=null, realtime=null;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function authMode(mode){document.getElementById('authLogin').classList.toggle('hidden',mode!=='login');document.getElementById('authSignup').classList.toggle('hidden',mode!=='signup');loginTab.classList.toggle('sel',mode==='login');signupTab.classList.toggle('sel',mode==='signup');authMsg.textContent=''}
+async function login(){authMsg.textContent='Signing in...';const {error}=await sb.auth.signInWithPassword({email:le.value.trim(),password:lp.value});if(error){authMsg.textContent=error.message;return}await boot()}
+async function signup(){
+  const msg=document.getElementById('authMsg');
+  msg.textContent='Creating account...';
+  const name=document.getElementById('sn').value.trim();
+  const email=document.getElementById('se').value.trim();
+  const password=document.getElementById('sp').value;
+  const age=Number(document.getElementById('sa').value);
+  const gender=document.getElementById('sg').value;
+  const lookingFor=document.getElementById('slf').value;
+  const location=document.getElementById('sl').value.trim();
+  const about=document.getElementById('sb').value.trim();
+  const interests=document.getElementById('si').value.split(',').map(x=>x.trim()).filter(Boolean);
+  if(!name||!email||!password||!age||age<18||!location){msg.textContent='Please complete the required fields. Age must be 18 or older.';return;}
+  const {data,error}=await sb.auth.signUp({email,password,options:{data:{name,age,gender,looking_for:lookingFor,location,about,interests}}});
+  if(error){
+    msg.textContent=error.message.includes('rate limit')?'Email sending limit reached. Please wait before trying another signup.':error.message;
+    return;
+  }
+  if(data.session){
+    await ensureProfile({name,age,gender,looking_for:lookingFor,location,about,interests});
+    await boot();
+  } else {
+    msg.textContent='Account created. Please verify your email, then login. Your profile details are saved with the account.';
+  }
+}
+async function ensureProfile(values={}){
+  if(!me)return;
+  const {data}=await sb.from('profiles').select('id').eq('id',me.id).maybeSingle();
+  if(data)return;
+  const meta=me.user_metadata||{};
+  const payload={id:me.id,name:values.name||meta.name||'',age:Number(values.age||meta.age||18),gender:values.gender||meta.gender||'',looking_for:values.looking_for||meta.looking_for||'',location:values.location||meta.location||'',about:values.about||meta.about||'',interests:Array.isArray(values.interests)?values.interests:(Array.isArray(meta.interests)?meta.interests:[])};
+  const {error}=await sb.from('profiles').insert(payload);
+  if(error) console.error(error);
+}
+async function boot(){const {data}=await sb.auth.getSession();if(!data.session){showAuth();return}me=data.session.user;await loadMe();await loadExplore();nav.classList.remove('hidden');document.getElementById('auth').classList.remove('active');document.getElementById('gear').style.display='block';show('explore');subscribeMessages()}
+function showAuth(){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));auth.classList.add('active');nav.classList.add('hidden')}
+async function loadMe(){
+  const {data,error}=await sb.from('profiles').select('*').eq('id',me.id).maybeSingle();
+  if(error){document.getElementById('authMsg').textContent=error.message;return;}
+  if(!data){await ensureProfile();const retry=await sb.from('profiles').select('*').eq('id',me.id).maybeSingle();window.meProfile=retry.data||{};}else window.meProfile=data;
+  const p=window.meProfile||{};
+  document.getElementById('myLocTop').textContent=p.location||'Your location';
+  document.getElementById('myName').textContent=(p.name||'')+(p.age?', '+p.age:'');
+  document.getElementById('myLocation').textContent=p.location||'';
+  document.getElementById('myAvatar').textContent=(p.name||'M')[0].toUpperCase();
+  fillEdit();
+}
+async function loadExplore(){const {data,error}=await sb.from('profiles').select('*').neq('id',me.id).order('created_at',{ascending:false});if(error){exploreCard.innerHTML='<div class="empty">'+esc(error.message)+'</div>';return}profiles=data||[];currentIndex=0;renderExplore()}
+function renderExplore(){if(currentIndex>=profiles.length){exploreCard.innerHTML='<div class="card empty"><h3>No more profiles</h3><p>New profiles will appear here when they join.</p></div>';return}const p=profiles[currentIndex];exploreCard.innerHTML=`<div class="card"><div class="photo"><div class="avatar">${esc((p.name||'?')[0].toUpperCase())}</div><div class="badge">${currentIndex+1} / ${profiles.length}</div></div><div class="info"><div class="name">${esc(p.name||'Member')}${p.age?', '+esc(p.age):''}</div><div class="muted">${esc(p.location||'')}</div><div class="bio"><b>About me</b><br>${esc(p.about||'')}</div><p><b>Interests</b><br>${esc((p.interests||[]).join('　'))}</p></div><div class="actions"><button class="round" onclick="skip()">✕</button><button class="round" onclick="viewCurrent()">☆</button><button class="round like" onclick="likeCurrent()">♥</button><button class="round" onclick="openProfile()">👁</button></div></div>`}
+async function recordView(id){await sb.from('profile_views').upsert({viewer_id:me.id,viewed_id:id},{onConflict:'viewer_id,viewed_id'})}
+async function viewCurrent(){const p=profiles[currentIndex];await recordView(p.id);alert('Profile viewed');}
+async function openProfile(){const p=profiles[currentIndex];await recordView(p.id);alert('Profile viewed.');}
+async function likeCurrent(){const p=profiles[currentIndex];const {error}=await sb.from('likes').upsert({liker_id:me.id,liked_id:p.id},{onConflict:'liker_id,liked_id'});if(error){alert(error.message);return}await recordView(p.id);currentIndex++;renderExplore()}
+function skip(){currentIndex++;renderExplore()}
+async function show(id){
+  const target=document.getElementById(id); if(!target)return;
+  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+  target.classList.add('active');
+  document.querySelectorAll('#nav button').forEach(x=>x.classList.toggle('activeNav',x.dataset.s===id));
+  if(id==='viewed')await loadViewed();
+  if(id==='liked')await loadLiked();
+  if(id==='chats')await loadChats();
+  if(id==='profile')await loadMe();
+  if(id==='edit')fillEdit();
+  if(id==='settings')document.getElementById('nav').classList.add('hidden');
+  else if(me && id!=='auth' && id!=='settingDetail' && id!=='chatroom')document.getElementById('nav').classList.remove('hidden');
+  if(id==='auth')document.getElementById('nav').classList.add('hidden');
+  document.getElementById('gear').style.display=me?'block':'none';
+  window.scrollTo(0,0);
+}
+function openSettings(){if(!me){show('auth');return;}show('settings');}
+function closeSettings(){if(me){show('profile');}else{show('auth');}}
+function showSetting(type){
+  const data={account:['Account','Your LoveConnect account details are managed securely through Supabase.'],notifications:['Notifications','Notification preferences will appear here.'],privacy:['Privacy & Safety','Your profile activity and messages are protected by database security policies.'],help:['Help & Support','Use the Back button to return to Settings. Support options can be added here later.']};
+  const item=data[type]; if(!item)return;
+  document.getElementById('settingTitle').textContent=item[0];
+  document.getElementById('settingBody').textContent=item[1];
+  show('settingDetail');
+}
+
+async function loadViewed(){const {data}=await sb.from('profile_views').select('viewed_id,created_at').eq('viewer_id',me.id).order('created_at',{ascending:false});const ids=(data||[]).map(x=>x.viewed_id);viewCount.textContent=ids.length;await renderPeopleByIds('viewedList',ids,'Viewed')}
+async function loadLiked(){const {data}=await sb.from('likes').select('liker_id,created_at').eq('liked_id',me.id).order('created_at',{ascending:false});const ids=(data||[]).map(x=>x.liker_id);likeCount.textContent=ids.length;await renderPeopleByIds('likedList',ids,'Liked you')}
+async function renderPeopleByIds(el,ids,label){if(!ids.length){document.getElementById(el).innerHTML='<div class="empty">No '+label.toLowerCase()+' activity yet.</div>';return}const {data}=await sb.from('profiles').select('*').in('id',ids);const map=new Map((data||[]).map(x=>[x.id,x]));document.getElementById(el).innerHTML=ids.map(id=>{const p=map.get(id);if(!p)return '';return `<div class="person click" onclick="startChat('${p.id}')"><div class="miniavatar">${esc((p.name||'?')[0].toUpperCase())}</div><div class="details"><b>${esc(p.name||'Member')}${p.age?', '+esc(p.age):''}</b><small>${esc(p.location||'')}</small></div>${label==='Liked you'?'<span class="heart">♥</span>':'<button class="mini">Chat</button>'}</div>`}).join('')||'<div class="empty">No activity yet.</div>'}
+async function loadChats(){const {data}=await sb.from('messages').select('*').or(`sender_id.eq.${me.id},receiver_id.eq.${me.id}`).order('created_at',{ascending:false});const map=new Map();(data||[]).forEach(m=>{const other=m.sender_id===me.id?m.receiver_id:m.sender_id;if(!map.has(other))map.set(other,m)});const ids=[...map.keys()];if(!ids.length){chatList.innerHTML='<div class="empty">No chats yet. Like someone and start a conversation when you connect.</div>';return}const {data:ps}=await sb.from('profiles').select('*').in('id',ids);const pm=new Map((ps||[]).map(x=>[x.id,x]));chatList.innerHTML=ids.map(id=>{const p=pm.get(id),m=map.get(id);return `<div class="person click" onclick="startChat('${id}')"><div class="miniavatar">${esc((p?.name||'?')[0].toUpperCase())}</div><div class="details"><b>${esc(p?.name||'Member')}</b><small>${esc(m.body)}</small></div><small>${new Date(m.created_at).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}</small></div>`}).join('')}
+async function startChat(id){currentChatUser=id;const {data:p}=await sb.from('profiles').select('*').eq('id',id).single();chatName.textContent=p?.name||'Chat';await loadMessages();show('chatroom')}
+async function loadMessages(){const {data,error}=await sb.from('messages').select('*').or(`and(sender_id.eq.${me.id},receiver_id.eq.${currentChatUser}),and(sender_id.eq.${currentChatUser},receiver_id.eq.${me.id})`).order('created_at',{ascending:true});if(error){messages.innerHTML='<div class="empty">'+esc(error.message)+'</div>';return}messages.innerHTML=(data||[]).map(m=>`<div class="bubble ${m.sender_id===me.id?'me':''}">${esc(m.body)}</div>`).join('')||'<div class="empty">Start the conversation.</div>';messages.scrollTop=messages.scrollHeight}
+async function send(){const body=message.value.trim();if(!body||!currentChatUser)return;const {error}=await sb.from('messages').insert({sender_id:me.id,receiver_id:currentChatUser,body});if(error){alert(error.message);return}message.value='';await loadMessages()}
+function subscribeMessages(){if(realtime)sb.removeChannel(realtime);realtime=sb.channel('loveconnect-messages').on('postgres_changes',{event:'INSERT',schema:'public',table:'messages'},payload=>{if(currentChatUser&&(payload.new.sender_id===currentChatUser||payload.new.receiver_id===currentChatUser))loadMessages()}).subscribe()}
+function fillEdit(){const p=window.meProfile||{};en.value=p.name||'';ea.value=p.age||'';eg.value=p.gender||'';elf.value=p.looking_for||'';el.value=p.location||'';eb.value=p.about||'';ei.value=(p.interests||[]).join(', ')}
+async function saveProfile(e){e.preventDefault();const {error}=await sb.from('profiles').update({name:en.value.trim(),age:+ea.value,gender:eg.value,looking_for:elf.value,location:el.value.trim(),about:eb.value.trim(),interests:ei.value.split(',').map(x=>x.trim()).filter(Boolean)}).eq('id',me.id);if(error){alert(error.message);return}await loadMe();show('profile')}
+async function logout(){await sb.auth.signOut();me=null;profiles=[];window.meProfile=null;profiles=[];document.getElementById('gear').style.display='none';showAuth();authMode('login')}
+sb.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT')showAuth()});boot();
+</script></body></html>
