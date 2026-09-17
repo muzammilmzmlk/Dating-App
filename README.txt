@@ -1,2 +1,4 @@
-LoveConnect V36
-Based on V35. Fixed Explore action bar so fixed Like/Pass controls no longer cover profile details; added bottom spacing for safe scrolling.
+LoveConnect V38
+Based on V36.
+Keeps the V36 layout and fixes global viewProfile availability so profile loading does not fail with "Can't find variable: viewProfile" when deployed.
+No other requested feature changes.
