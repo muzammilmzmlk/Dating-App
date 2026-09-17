@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect — Dating Website</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#fff5f7;color:#222}
+header{height:64px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 7%;box-shadow:0 1px 8px #0001;position:sticky;top:0;z-index:5}
+.logo{font-size:25px;font-weight:800;color:#e83e68}.login{border:1px solid #e83e68;color:#e83e68;background:white;border-radius:22px;padding:9px 20px}
+.hero{min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
+.hero h1{font-size:48px;margin:10px 0}.hero p{font-size:18px;color:#666}.cta{background:#e83e68;color:white;border:0;border-radius:28px;padding:15px 32px;font-size:17px;font-weight:700;margin-top:18px}
+.card{display:none;max-width:430px;margin:40px auto;background:#fff;padding:28px;border-radius:20px;box-shadow:0 8px 30px #0001}
+input,select,textarea{width:100%;padding:13px;margin:7px 0;border:1px solid #ddd;border-radius:10px;font-size:15px}
+.card button{width:100%;padding:13px;border:0;border-radius:10px;background:#e83e68;color:#fff;font-weight:bold;margin-top:8px}
+.small{font-size:13px;color:#777;text-align:center;margin-top:15px}.back{background:none!important;color:#e83e68!important}
+</style>
+</head>
+<body>
+<header><div class="logo">♥ Connect</div><button class="login" onclick="show('login')">Login</button></header>
+
+<section id="home" class="hero">
+<div><div style="font-size:55px">♥</div><h1>Meet someone special.</h1>
+<p>Discover people, make a connection, and see where it goes.</p>
+<button class="cta" onclick="show('signup')">Create Account</button></div>
+</section>
+
+<section id="signup" class="card">
+<h2>Create your account</h2>
+<input placeholder="Your name"><input type="email" placeholder="Email">
+<input type="password" placeholder="Password"><input type="number" placeholder="Age">
+<select><option>Gender</option><option>Man</option><option>Woman</option><option>Other</option></select>
+<select><option>Looking for</option><option>Men</option><option>Women</option><option>Everyone</option></select>
+<input placeholder="Location">
+<button onclick="alert('Account created — demo version')">Create Account</button>
+<button class="back" onclick="show('home')">Back</button>
+</section>
+
+<section id="login" class="card">
+<h2>Welcome back</h2>
+<input type="email" placeholder="Email"><input type="password" placeholder="Password">
+<button onclick="alert('Login — demo version')">Login</button>
+<button class="back" onclick="show('home')">Back</button>
+</section>
+
+<script>
+function show(id){
+ document.querySelectorAll('section').forEach(x=>x.style.display='none');
+ document.getElementById(id).style.display=id==='home'?'flex':'block';
+}
+</script>
+</body>
+</html>
